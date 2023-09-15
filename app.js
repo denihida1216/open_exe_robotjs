@@ -5,6 +5,11 @@ const app = express();
 const port = 3000;
 let child;
 
+require('dotenv').config();
+const username = process.env.USERNAME;
+const secretKey = process.env.SECRET_KEY;
+console.log(username);
+console.log(secretKey);
 app.get("/fingerprint", (req, res) => {
   const programPath =
     '"C:\\Program Files (x86)\\BPJS Kesehatan\\Aplikasi Sidik Jari BPJS Kesehatan\\After.exe"';
@@ -50,9 +55,9 @@ app.get("/fingerprint", (req, res) => {
   });
 
   setTimeout(() => {
-    robot.typeString("DH1002R005");
+    robot.typeString(username);
     robot.keyTap(["tab"]);
-    robot.typeString("Direy1010!");
+    robot.typeString(secretKey);
     robot.keyTap(["tab"]);
     robot.keyTap(["enter"]);
     setTimeout(() => {
